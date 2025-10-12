@@ -11,7 +11,7 @@
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        
+        
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
@@ -21,7 +21,7 @@
             padding: 20px;
             color: #333;
         }
-        
+        
         .container {
             width: 100%;
             max-width: 400px;
@@ -31,7 +31,7 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
         }
-        
+        
         .header {
             background: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
             padding: 20px;
@@ -39,31 +39,31 @@
             color: white;
             position: relative;
         }
-        
+        
         h1 {
             font-size: 24px;
             font-weight: 600;
             margin-bottom: 5px;
         }
-        
+        
         .subtitle {
             font-size: 14px;
             opacity: 0.9;
         }
-        
+        
         .year-selector {
             padding: 15px 20px;
             background: white;
             border-bottom: 1px solid #eee;
         }
-        
+        
         .year-selector label {
             display: block;
             font-weight: 500;
             margin-bottom: 8px;
             color: #4A4A4A;
         }
-        
+        
         .year-selector select {
             width: 100%;
             padding: 12px 15px;
@@ -77,12 +77,12 @@
             background-position: right 15px center;
             background-size: 10px;
         }
-        
+        
         .zodiac-table {
             width: 100%;
             border-collapse: collapse;
         }
-        
+        
         .zodiac-table th {
             background-color: #f8f8f8;
             padding: 12px 15px;
@@ -92,17 +92,17 @@
             color: #666;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+        
         .zodiac-table td {
             padding: 12px 15px;
             border-bottom: 1px solid #f0f0f0;
         }
-        
+        
         .zodiac-name {
             font-weight: 500;
             width: 50px;
         }
-        
+        
         .ages {
             font-size: 12px;
             color: #666;
@@ -111,7 +111,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        
+        
         .input-box {
             width: 70px;
             padding: 8px 10px;
@@ -121,7 +121,7 @@
             font-size: 14px;
             text-align: center;
         }
-        
+        
         .select-btn {
             padding: 8px 12px;
             background: #4A90E2;
@@ -133,15 +133,15 @@
             font-weight: 500;
             transition: all 0.2s;
         }
-        
+        
         .select-btn.selected {
             background: #7B68EE;
         }
-        
+        
         .current-year {
             background-color: rgba(123, 104, 238, 0.1);
         }
-        
+        
         .calculation-result {
             margin: 20px;
             padding: 20px;
@@ -149,39 +149,39 @@
             border-radius: 15px;
             text-align: center;
         }
-        
+        
         .result-label {
             font-weight: 500;
             margin-bottom: 10px;
             color: #666;
         }
-        
+        
         .result-value {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 5px;
         }
-        
+        
         .positive {
             color: #007AFF; /* 蓝色表示盈 */
         }
-        
+        
         .negative {
             color: #FF3B30; /* 红色表示亏 */
         }
-        
+        
         .result-desc {
             font-size: 12px;
             color: #888;
         }
-        
+        
         .action-buttons {
             display: flex;
             justify-content: space-between;
             padding: 0 20px 20px;
             gap: 10px;
         }
-        
+        
         .action-btn {
             flex: 1;
             padding: 12px;
@@ -191,22 +191,22 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        
+        
         .save-btn {
             background: #4CD964;
             color: white;
         }
-        
+        
         .clear-btn {
             background: #FF3B30;
             color: white;
         }
-        
+        
         .random-btn {
             background: #FF9500;
             color: white;
         }
-        
+        
         .footer {
             padding: 15px 20px;
             text-align: center;
@@ -215,41 +215,41 @@
             background: #f8f8f8;
             border-top: 1px solid #e0e0e0;
         }
-        
+        
         .zodiac-table-container {
             max-height: 300px;
             overflow-y: auto;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+        
         /* iPhone样式滚动条 */
         .zodiac-table-container::-webkit-scrollbar {
             width: 5px;
         }
-        
+        
         .zodiac-table-container::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
-        
+        
         .zodiac-table-container::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 10px;
         }
-        
+        
         .zodiac-table-container::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
-        
+        
         /* 按钮悬停效果 */
         .select-btn:hover, .action-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        
+        
         .select-btn:active, .action-btn:active {
             transform: translateY(0);
         }
-        
+        
         /* 状态提示 */
         .status-message {
             text-align: center;
@@ -259,11 +259,11 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+        
         .status-message.show {
             opacity: 1;
         }
-        
+        
         .profit-status {
             font-size: 16px;
             font-weight: 600;
@@ -277,14 +277,14 @@
             <h1>生肖计算器</h1>
             <div class="subtitle">基于中国农历的年龄计算工具</div>
         </div>
-        
+        
         <div class="year-selector">
             <label for="year-select">选择年份</label>
             <select id="year-select">
                 <!-- 年份选项将通过JavaScript动态生成 -->
             </select>
         </div>
-        
+        
         <div class="zodiac-table-container">
             <table class="zodiac-table">
                 <thead>
@@ -300,22 +300,22 @@
                 </tbody>
             </table>
         </div>
-        
+        
         <div class="status-message" id="status-message"></div>
-        
+        
         <div class="calculation-result">
             <div class="result-label">计算结果</div>
             <div class="result-value" id="result-value">0</div>
             <div class="profit-status" id="profit-status"></div>
             <div class="result-desc" id="result-desc"></div>
         </div>
-        
+        
         <div class="action-buttons">
             <button class="action-btn save-btn" id="save-btn">保存</button>
             <button class="action-btn clear-btn" id="clear-btn">清除</button>
             <button class="action-btn random-btn" id="random-btn">随机</button>
         </div>
-        
+        
         <div class="footer">
             <p>选中当前年份生肖时乘9倍，其他生肖乘11倍</p>
         </div>
@@ -324,7 +324,7 @@
     <script>
         // 生肖数组 - 按照正确的生肖顺序排列
         const zodiacs = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
-        
+        
         // 2025年生肖年龄匹配标准
         const zodiacAges2025 = {
             "蛇": [1, 13, 25, 37, 49],
@@ -340,14 +340,14 @@
             "猴": [10, 22, 34, 46],
             "羊": [11, 23, 35, 47]
         };
-        
+        
         // 初始化年份选择器
         function initYearSelector() {
             const yearSelect = document.getElementById('year-select');
             const currentYear = new Date().getFullYear();
             const startYear = 2025;
             const endYear = currentYear + 10;
-            
+            
             for (let year = startYear; year <= endYear; year++) {
                 const option = document.createElement('option');
                 option.value = year;
@@ -357,11 +357,11 @@
                 }
                 yearSelect.appendChild(option);
             }
-            
+            
             // 年份变化时更新生肖表
             yearSelect.addEventListener('change', updateZodiacTable);
         }
-        
+        
         // 根据年份计算生肖
         function getZodiacByYear(year) {
             // 生肖计算：2025年是蛇年
@@ -371,16 +371,16 @@
             const index = (year - baseYear + baseZodiacIndex) % 12;
             return zodiacs[index >= 0 ? index : index + 12];
         }
-        
+        
         // 根据年份和生肖计算对应年龄
         function getAgesForZodiac(year, zodiac) {
             // 计算年份差
             const yearDiff = year - 2025;
-            
+            
             // 获取2025年该生肖的年龄
             const baseAges = zodiacAges2025[zodiac];
             if (!baseAges) return [];
-            
+            
             // 根据年份差调整年龄
             const ages = [];
             for (const age of baseAges) {
@@ -390,7 +390,7 @@
                     ages.push(adjustedAge);
                 }
             }
-            
+            
             // 特殊处理：如果当前年份是该生肖年，确保包含1岁
             const currentZodiac = getZodiacByYear(year);
             if (zodiac === currentZodiac && !ages.includes(1)) {
@@ -405,40 +405,40 @@
                     }
                 }
             }
-            
+            
             return ages;
         }
-        
+        
         // 更新生肖表格
         function updateZodiacTable() {
             const year = parseInt(document.getElementById('year-select').value);
             const currentZodiac = getZodiacByYear(year);
             const tbody = document.getElementById('zodiac-tbody');
             tbody.innerHTML = '';
-            
+            
             // 为每个生肖创建行
             zodiacs.forEach(zodiac => {
                 // 计算该生肖对应的年龄
                 const ages = getAgesForZodiac(year, zodiac);
-                
+                
                 // 创建行
                 const row = document.createElement('tr');
                 if (zodiac === currentZodiac) {
                     row.classList.add('current-year');
                 }
-                
+                
                 // 生肖名称单元格
                 const zodiacCell = document.createElement('td');
                 zodiacCell.textContent = zodiac;
                 zodiacCell.className = 'zodiac-name';
                 row.appendChild(zodiacCell);
-                
+                
                 // 年龄单元格
                 const ageCell = document.createElement('td');
                 ageCell.textContent = ages.join(', ');
                 ageCell.className = 'ages';
                 row.appendChild(ageCell);
-                
+                
                 // 输入框单元格
                 const inputCell = document.createElement('td');
                 const input = document.createElement('input');
@@ -449,7 +449,7 @@
                 input.addEventListener('input', calculateResult);
                 inputCell.appendChild(input);
                 row.appendChild(inputCell);
-                
+                
                 // 选择按钮单元格
                 const buttonCell = document.createElement('td');
                 const button = document.createElement('button');
@@ -467,17 +467,17 @@
                 });
                 buttonCell.appendChild(button);
                 row.appendChild(buttonCell);
-                
+                
                 tbody.appendChild(row);
             });
-            
+            
             // 初始计算
             calculateResult();
-            
+            
             // 尝试加载保存的数据
             loadSavedData();
         }
-        
+        
         // 计算表达式
         function calculateExpression(expr) {
             try {
@@ -488,20 +488,20 @@
                 return 0;
             }
         }
-        
+        
         // 计算结果
         function calculateResult() {
             const year = parseInt(document.getElementById('year-select').value);
             const currentZodiac = getZodiacByYear(year);
-            
+            
             // 获取所有输入框的值并计算总和
             let totalSum = 0;
             const inputValues = {};
-            
+            
             document.querySelectorAll('.input-box').forEach(input => {
                 const zodiac = input.dataset.zodiac;
                 const value = input.value.trim();
-                
+                
                 if (value) {
                     const numValue = calculateExpression(value);
                     inputValues[zodiac] = numValue;
@@ -510,23 +510,23 @@
                     inputValues[zodiac] = 0;
                 }
             });
-            
+            
             // 获取选中的生肖
             const selectedBtn = document.querySelector('.select-btn.selected');
             let result = totalSum;
             let resultDesc = '';
             let profitStatus = '';
-            
+            
             if (selectedBtn) {
                 const selectedZodiac = selectedBtn.dataset.zodiac;
                 const selectedValue = inputValues[selectedZodiac] || 0;
-                
+                
                 // 计算倍数 - 更新为9倍和11倍
                 const multiplier = (selectedZodiac === currentZodiac) ? 9 : 11;
                 result = totalSum - (selectedValue * multiplier);
-                
+                
                 resultDesc = `总和: ${totalSum} - (${selectedZodiac}的数值: ${selectedValue} × ${multiplier}) = ${result}`;
-                
+                
                 // 设置盈亏状态
                 if (result > 0) {
                     profitStatus = '盈';
@@ -539,16 +539,16 @@
                 resultDesc = `总和: ${totalSum}`;
                 profitStatus = '';
             }
-            
+            
             // 显示结果
             const resultValue = document.getElementById('result-value');
             const resultDescElem = document.getElementById('result-desc');
             const profitStatusElem = document.getElementById('profit-status');
-            
+            
             resultValue.textContent = result;
             resultDescElem.textContent = resultDesc;
             profitStatusElem.textContent = profitStatus;
-            
+            
             // 设置颜色
             if (result > 0) {
                 resultValue.className = 'result-value positive';
@@ -561,42 +561,42 @@
                 profitStatusElem.className = 'profit-status';
             }
         }
-        
+        
         // 保存数据到localStorage
         function saveData() {
             const year = document.getElementById('year-select').value;
             const selectedZodiac = document.querySelector('.select-btn.selected')?.dataset.zodiac || '';
-            
+            
             const inputValues = {};
             document.querySelectorAll('.input-box').forEach(input => {
                 const zodiac = input.dataset.zodiac;
                 const value = input.value;
                 inputValues[zodiac] = value;
             });
-            
+            
             const data = {
                 year: year,
                 selectedZodiac: selectedZodiac,
                 inputValues: inputValues
             };
-            
+            
             localStorage.setItem('zodiacCalculatorData', JSON.stringify(data));
             showStatusMessage('数据已保存');
         }
-        
+        
         // 从localStorage加载数据
         function loadSavedData() {
             const savedData = localStorage.getItem('zodiacCalculatorData');
             if (savedData) {
                 try {
                     const data = JSON.parse(savedData);
-                    
+                    
                     // 设置年份
                     document.getElementById('year-select').value = data.year;
-                    
+                    
                     // 更新表格
                     updateZodiacTable();
-                    
+                    
                     // 设置输入值
                     if (data.inputValues) {
                         document.querySelectorAll('.input-box').forEach(input => {
@@ -606,7 +606,7 @@
                             }
                         });
                     }
-                    
+                    
                     // 设置选中的生肖
                     if (data.selectedZodiac) {
                         document.querySelectorAll('.select-btn').forEach(btn => {
@@ -615,31 +615,31 @@
                             }
                         });
                     }
-                    
+                    
                     // 重新计算
                     calculateResult();
-                    
+                    
                     showStatusMessage('数据已加载');
                 } catch (e) {
                     console.error('加载保存数据失败:', e);
                 }
             }
         }
-        
+        
         // 清除所有数据
         function clearData() {
             document.querySelectorAll('.input-box').forEach(input => {
                 input.value = '';
             });
-            
+            
             document.querySelectorAll('.select-btn').forEach(btn => {
                 btn.classList.remove('selected');
             });
-            
+            
             calculateResult();
             showStatusMessage('数据已清除');
         }
-        
+        
         // 生成随机数值
         function randomizeValues() {
             document.querySelectorAll('.input-box').forEach(input => {
@@ -647,7 +647,7 @@
                 const randomValue = Math.floor(Math.random() * 100) + 1;
                 input.value = randomValue;
             });
-            
+            
             // 随机选择一个生肖
             const randomIndex = Math.floor(Math.random() * zodiacs.length);
             document.querySelectorAll('.select-btn').forEach((btn, index) => {
@@ -657,27 +657,27 @@
                     btn.classList.remove('selected');
                 }
             });
-            
+            
             calculateResult();
             showStatusMessage('已生成随机数值');
         }
-        
+        
         // 显示状态消息
         function showStatusMessage(message) {
             const statusElement = document.getElementById('status-message');
             statusElement.textContent = message;
             statusElement.classList.add('show');
-            
+            
             setTimeout(() => {
                 statusElement.classList.remove('show');
             }, 2000);
         }
-        
+        
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
             initYearSelector();
             updateZodiacTable();
-            
+            
             // 添加按钮事件监听器
             document.getElementById('save-btn').addEventListener('click', saveData);
             document.getElementById('clear-btn').addEventListener('click', clearData);
