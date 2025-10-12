@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<title>生肖自动计算器 v1.2.1（修正版）</title>
+<title>生肖自动计算器 v1.2.2（完全修正版）</title>
 <link rel="stylesheet" href="style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-<h1>生肖自动计算器 v1.2.1（修正版）</h1>
+<h1>生肖自动计算器 v1.2.2（完全修正版）</h1>
 <div class="controls">
 <label>选择年份（公历，≥2025）：<select id="yearSelect"></select></label>
 <button id="clearBtn">清空</button>
@@ -44,8 +44,10 @@ for(let y=2025;y<=2050;y++){let o=document.createElement('option');o.value=y;o.t
 yearSelect.value=2025;
 const tbody=document.getElementById('tbody');
 
+// ✅ 修正版：使用 Solar.fromYmd 转 Lunar
 function getLunarZodiac(year){
-  const lunar = Lunar.fromYmd(year, 1, 1);
+  const solar = Solar.fromYmd(year, 1, 1);
+  const lunar = solar.getLunar();
   const zodiac = lunar.getZodiac();
   return { name: zodiac, idx: zodiacs.indexOf(zodiac) };
 }
@@ -60,7 +62,8 @@ function gen(){
   const agesByZodiac = Array.from({length:12},()=>[]);
   for(let age=1; age<=49; age++){
     const birthYear = year - age;
-    const birthLunar = Lunar.fromYmd(birthYear, 7, 1);
+    const birthSolar = Solar.fromYmd(birthYear, 7, 1);
+    const birthLunar = birthSolar.getLunar();
     const zname = birthLunar.getZodiac();
     const idx = zodiacs.indexOf(zname);
     agesByZodiac[idx].push(age);
