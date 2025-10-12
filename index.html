@@ -2,30 +2,39 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>生肖自动计算器 v1.0</title>
+<title>生肖自动计算器 v1.2（iPhone App 风格）</title>
 <link rel="stylesheet" href="style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
-  <div class="container">
-    <h1>生肖自动计算器 v1.0</h1>
-    <div class="controls">
-      <label>选择起始年份：<select id="yearSelect"></select></label>
-      <button id="clearBtn">清空</button>
-      <button id="randomBtn">随机填值</button>
-      <button id="exportBtn">导出 CSV</button>
-    </div>
-    <table id="zodiacTable">
-      <thead><tr><th>生肖</th><th>对应年龄</th><th>输入</th><th>选中</th></tr></thead>
-      <tbody id="tbody"></tbody>
-    </table>
-    <div class="summary">
-      <span>总和：<strong id="totalSum">0</strong></span>
-      <span>当前生肖：<strong id="yearZodiac"></strong></span>
-      <span>选中：<strong id="selectedZodiacLabel">—</strong></span>
-      <span id="resultBadge">—</span>
-    </div>
-  </div>
+<div class="container">
+<h1>生肖自动计算器 v1.2（iPhone App 风格）</h1>
+<div class="controls">
+<label>选择年份（公历，≥2025）：<select id="yearSelect"></select></label>
+<button id="clearBtn">清空</button>
+<button id="randomBtn">随机填值</button>
+<button id="exportBtn">导出 CSV</button>
+</div>
+
+<table id="zodiacTable">
+<thead><tr><th>生肖</th><th>对应年龄</th><th>输入</th><th>选中</th></tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+
+<div class="summary">
+<span>总和：<strong id="totalSum">0</strong></span>
+<span>当前农历生肖：<strong id="yearZodiac"></strong></span>
+<span>选中：<strong id="selectedZodiacLabel">—</strong></span>
+<span id="resultBadge">—</span>
+</div>
+
+<div class="hint">生肖以中国农历周岁计算（春节前属上一年生肖，春节后属当年生肖）</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@2.0.0/dist/lunar.min.js"></script>
 
 <script>
 (function(){
@@ -34,26 +43,68 @@ const yearSelect=document.getElementById('yearSelect');
 for(let y=2025;y<=2050;y++){let o=document.createElement('option');o.value=y;o.textContent=y;yearSelect.appendChild(o);}
 yearSelect.value=2025;
 const tbody=document.getElementById('tbody');
-function getZodiac(y){let i=((y-4)%12+12)%12;return{name:zodiacs[i],idx:i};}
+
+function getLunarZodiac(year){
+  const lunarNewYear = Lunar.fromYmd(year,1,1).getSolar();
+  return {name: zodiacs[(year - 4) % 12], idx:(year-4)%12, lunarNewYear:lunarNewYear};
+}
+
 function parseExpr(e){if(!e)return 0;if(!/^[0-9+\-*/().\s]+$/.test(e))return 0;try{return Function('return('+e+')')();}catch{return 0;}}
-function gen(){let year=parseInt(yearSelect.value);let yz=getZodiac(year);document.getElementById('yearZodiac').textContent=yz.name+'('+year+')';
-tbody.innerHTML='';let ag=Array.from({length:12},()=>[]);
-for(let a=1;a<=49;a++){let by=year-a;let z=getZodiac(by);ag[z.idx].push(a);}
-for(let i=0;i<12;i++){let tr=document.createElement('tr');
-tr.innerHTML='<td>'+zodiacs[i]+'</td><td>'+ag[i].join(',')+'</td><td><input class="expr" data-i="'+i+'" /></td><td><input type="radio" name="sel" value="'+i+'"></td>';
-tbody.appendChild(tr);}calc();}
-function calc(){let inputs=document.querySelectorAll('.expr');let t=0,v=[];inputs.forEach(i=>{let val=parseExpr(i.value.trim());v.push(val);t+=val;});
-document.getElementById('totalSum').textContent=t;let s=document.querySelector('input[name=sel]:checked');let y=parseInt(yearSelect.value);let yz=getZodiac(y);
-let r=null;if(s){let i=parseInt(s.value);let m=(i===yz.idx)?8:10;r=t-v[i]*m;document.getElementById('selectedZodiacLabel').textContent=zodiacs[i]+'(x'+m+')';}
-let b=document.getElementById('resultBadge');if(r===null){b.textContent='请选择生肖';b.className='even';}
-else{b.textContent=(r>0?'盈 ':'亏 ')+r;if(r>0)b.className='profit';else if(r<0)b.className='loss';else b.className='even';}}
-yearSelect.onchange=gen;document.body.addEventListener('input',calc);document.body.addEventListener('change',calc);
+
+function gen(){
+  const year=parseInt(yearSelect.value);
+  const yz=getLunarZodiac(year);
+  document.getElementById('yearZodiac').textContent=yz.name+'('+year+')';
+
+  const agesByZodiac = Array.from({length:12},()=>[]);
+  for(let age=1; age<=49; age++){
+    const birthYear = year - age;
+    const zidx = (birthYear-4)%12;
+    agesByZodiac[(zidx+12)%12].push(age);
+  }
+
+  tbody.innerHTML='';
+  for(let i=0;i<12;i++){
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+zodiacs[i]+'</td><td>'+agesByZodiac[i].join(',')+'</td><td><input class="expr" data-i="'+i+'" /></td><td><input type="radio" name="sel" value="'+i+'"></td>';
+    tbody.appendChild(tr);
+  }
+  calc();
+}
+
+function calc(){
+  const inputs=document.querySelectorAll('.expr');
+  let t=0,rowValues=[];
+  inputs.forEach(i=>{let val=parseExpr(i.value.trim());rowValues.push(val);t+=val;});
+  document.getElementById('totalSum').textContent=t;
+  const selectedRadio=document.querySelector('input[name=sel]:checked');
+  const year=parseInt(yearSelect.value);
+  const yz=getLunarZodiac(year);
+  let result=null;
+  if(selectedRadio){
+    const idx=parseInt(selectedRadio.value);
+    const multiplier=(idx===yz.idx)?8:10;
+    result=t-rowValues[idx]*multiplier;
+    document.getElementById('selectedZodiacLabel').textContent=zodiacs[idx]+'(x'+multiplier+')';
+  } else {document.getElementById('selectedZodiacLabel').textContent='—';}
+  const badge=document.getElementById('resultBadge');
+  if(result===null){badge.textContent='请选择生肖';badge.className='even';}
+  else{badge.textContent=(result>0?'盈 ':'亏 ')+result;badge.className=result>0?'profit':(result<0?'loss':'even');}
+}
+
+yearSelect.onchange=gen;
+document.body.addEventListener('input',calc);
+document.body.addEventListener('change',calc);
 document.getElementById('clearBtn').onclick=()=>{document.querySelectorAll('.expr').forEach(i=>i.value='');document.querySelectorAll('input[name=sel]').forEach(i=>i.checked=false);calc();};
 document.getElementById('randomBtn').onclick=()=>{document.querySelectorAll('.expr').forEach(i=>i.value=Math.floor(Math.random()*1000)+1);calc();};
-document.getElementById('exportBtn').onclick=()=>{let rows=[['生肖','年龄','输入','选中']];
-document.querySelectorAll('#tbody tr').forEach(tr=>{rows.push(Array.from(tr.children).slice(0,4).map(td=>td.innerText));});
-let blob=new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='zodiac.csv';a.click();};
+document.getElementById('exportBtn').onclick=()=>{
+  let rows=[['生肖','年龄','输入','选中']];
+  document.querySelectorAll('#tbody tr').forEach(tr=>{rows.push(Array.from(tr.children).slice(0,4).map(td=>td.innerText));});
+  let blob=new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'});
+  let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='zodiac_lunar_app.csv';a.click();
+};
 gen();
-})();</script>
+})();
+</script>
 </body>
 </html>
