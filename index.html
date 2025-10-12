@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />
-<title>生肖自动计算器 v1.2（iPhone App 风格）</title>
+<title>生肖自动计算器 v1.2.1（修正版）</title>
 <link rel="stylesheet" href="style.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-<h1>生肖自动计算器 v1.2（iPhone App 风格）</h1>
+<h1>生肖自动计算器 v1.2.1（修正版）</h1>
 <div class="controls">
 <label>选择年份（公历，≥2025）：<select id="yearSelect"></select></label>
 <button id="clearBtn">清空</button>
@@ -45,8 +45,9 @@ yearSelect.value=2025;
 const tbody=document.getElementById('tbody');
 
 function getLunarZodiac(year){
-  const lunarNewYear = Lunar.fromYmd(year,1,1).getSolar();
-  return {name: zodiacs[(year - 4) % 12], idx:(year-4)%12, lunarNewYear:lunarNewYear};
+  const lunar = Lunar.fromYmd(year, 1, 1);
+  const zodiac = lunar.getZodiac();
+  return { name: zodiac, idx: zodiacs.indexOf(zodiac) };
 }
 
 function parseExpr(e){if(!e)return 0;if(!/^[0-9+\-*/().\s]+$/.test(e))return 0;try{return Function('return('+e+')')();}catch{return 0;}}
@@ -59,8 +60,10 @@ function gen(){
   const agesByZodiac = Array.from({length:12},()=>[]);
   for(let age=1; age<=49; age++){
     const birthYear = year - age;
-    const zidx = (birthYear-4)%12;
-    agesByZodiac[(zidx+12)%12].push(age);
+    const birthLunar = Lunar.fromYmd(birthYear, 7, 1);
+    const zname = birthLunar.getZodiac();
+    const idx = zodiacs.indexOf(zname);
+    agesByZodiac[idx].push(age);
   }
 
   tbody.innerHTML='';
