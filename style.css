@@ -1,0 +1,11 @@
+body{font-family:Arial,Microsoft YaHei,sans-serif;background:#f8f9fb;margin:0;padding:24px;}
+.container{background:#fff;padding:20px;border-radius:8px;max-width:900px;margin:auto;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+table{width:100%;border-collapse:collapse;margin-top:12px;}
+th,td{border-bottom:1px solid #eee;padding:8px;text-align:left;}
+input.expr{width:100%;padding:6px;border:1px solid #ccc;border-radius:4px;}
+button{padding:6px 10px;margin-right:6px;border:1px solid #ccc;border-radius:4px;cursor:pointer;}
+button:hover{background:#007bff;color:#fff;border-color:#007bff;}
+.profit{color:#007bff;font-weight:bold;}
+.loss{color:#d9534f;font-weight:bold;}
+.even{color:#222;}
+.summary{margin-top:10px;font-size:14px;}
